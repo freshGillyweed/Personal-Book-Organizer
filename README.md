@@ -9,3 +9,4 @@
 - As a user, I would like to view a list of the books I did not enjoy reading.
 - As a user, I would like to check my favourite book(s) by referring to rating and the number of times read
 - As a user, I would like to check my favourite author by referring to the number of times an author shows up in my data
+- As a user, I would like to make a note of which page I have left off for each book that I am currently reading.
