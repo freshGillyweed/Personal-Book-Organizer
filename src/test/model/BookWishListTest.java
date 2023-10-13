@@ -22,8 +22,8 @@ public class BookWishListTest {
 
     @Test
     void testAddBook() {
-        Book book1 = new Book(1,"Delia Owens","Where the Crawdads Sing","Mystery",400);
-        Book book2 = new Book(2,"Milan Kundera","The Unbearable Lightness of Being","Philosophical fiction",230);
+        Book book1 = new Book("Delia Owens","Where the Crawdads Sing","Mystery",400);
+        Book book2 = new Book("Milan Kundera","The Unbearable Lightness of Being","Philosophical fiction",230);
         testBookWishList.addBook(book1);
         testBookWishList.addBook(book1);
         testBookWishList.addBook(book2);

@@ -1,10 +1,11 @@
 package model;
 
+// represents a book review having a book, rating,
 public class BookReview {
     private Book book;
     private double rating;
-    private int numberOfTimesRead;
     private String review = null;
+    private int numberOfTimesRead;
 
     public BookReview(Book book) {
         this.book = book;

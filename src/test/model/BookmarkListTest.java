@@ -22,8 +22,8 @@ class BookmarkListTest {
 
     @Test
     void testAddBookmark() {
-        Book book1 = new Book(1, "Louis Lowry", "The Giver", "Science fiction", 250);
-        Book book2 = new Book(2, "S.E. Hinton", "The Outsiders", "Young adult fiction", 140);
+        Book book1 = new Book( "Louis Lowry", "The Giver", "Science fiction", 250);
+        Book book2 = new Book( "S.E. Hinton", "The Outsiders", "Young adult fiction", 140);
         Bookmark bookmark1 = new Bookmark(book1);
         Bookmark bookmark2 = new Bookmark(book2);
         testBookmarkList.addBookmark(bookmark1);
@@ -33,8 +33,8 @@ class BookmarkListTest {
 
     @Test
     void testUpdateBookmark() {
-        Book book1 = new Book(1, "Louis Lowry", "The Giver", "Science fiction", 250);
-        Book book2 = new Book(2, "S.E. Hinton", "The Outsiders", "Young adult fiction", 140);
+        Book book1 = new Book( "Louis Lowry", "The Giver", "Science fiction", 250);
+        Book book2 = new Book( "S.E. Hinton", "The Outsiders", "Young adult fiction", 140);
         Bookmark bookmark1 = new Bookmark(book1);
         Bookmark bookmark2 = new Bookmark(book2);
         testBookmarkList.addBookmark(bookmark1);

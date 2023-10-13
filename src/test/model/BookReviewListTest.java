@@ -23,7 +23,7 @@ public class BookReviewListTest {
 
     @Test
     void testAddBookReview() {
-        Book book1 = new Book(1, "Louis Lowry", "The Giver", "Science fiction", 250);
+        Book book1 = new Book("Louis Lowry", "The Giver", "Science fiction", 250);
         BookReview bookReview1 = new BookReview(book1);
         bookReview1.updateRating(8.0);
         bookReview1.updateNumberOfTimesRead();
@@ -36,15 +36,15 @@ public class BookReviewListTest {
 
     @Test
     void testGetHighRatedBooks() {
-        Book book1 = new Book(1, "Louis Lowry", "The Giver", "Science fiction", 250);
+        Book book1 = new Book( "Louis Lowry", "The Giver", "Science fiction", 250);
         BookReview bookReview1 = new BookReview(book1);
         bookReview1.updateRating(9.0);
 
-        Book book2 = new Book(2, "Vladimir Nabokov", "Lolita", "Erotic literature", 400);
+        Book book2 = new Book( "Vladimir Nabokov", "Lolita", "Erotic literature", 400);
         BookReview bookReview2 = new BookReview(book2);
         bookReview2.updateRating(6.0);
 
-        Book book3 = new Book(3, "Dan Brown", "The Da Vinci Code", "Thriller", 310);
+        Book book3 = new Book( "Dan Brown", "The Da Vinci Code", "Thriller", 310);
         BookReview bookReview3 = new BookReview(book3);
         bookReview3.updateRating(2.0);
 
@@ -60,15 +60,15 @@ public class BookReviewListTest {
 
     @Test
     void testGetLowRatedBooks() {
-        Book book1 = new Book(1, "Louis Lowry", "The Giver", "Science fiction", 250);
+        Book book1 = new Book( "Louis Lowry", "The Giver", "Science fiction", 250);
         BookReview bookReview1 = new BookReview(book1);
         bookReview1.updateRating(9.0);
 
-        Book book2 = new Book(2, "Deborah Ellis", "The Breadwinner", "Children's literature", 120);
+        Book book2 = new Book( "Deborah Ellis", "The Breadwinner", "Children's literature", 120);
         BookReview bookReview2 = new BookReview(book2);
         bookReview2.updateRating(5.0);
 
-        Book book3 = new Book(3, "Dan Brown", "The Da Vinci Code", "Thriller", 310);
+        Book book3 = new Book( "Dan Brown", "The Da Vinci Code", "Thriller", 310);
         BookReview bookReview3 = new BookReview(book3);
         bookReview3.updateRating(2.0);
 
@@ -84,15 +84,15 @@ public class BookReviewListTest {
 
     @Test
     void testGetFavoriteBook() {
-        Book book1 = new Book(1, "Louis Lowry", "The Giver", "Science fiction", 250);
+        Book book1 = new Book( "Louis Lowry", "The Giver", "Science fiction", 250);
         BookReview bookReview1 = new BookReview(book1);
         bookReview1.updateRating(9.0);
 
-        Book book2 = new Book(2, "S.E. Hinton", "The Outsiders", "Young adult fiction", 200);
+        Book book2 = new Book( "S.E. Hinton", "The Outsiders", "Young adult fiction", 200);
         BookReview bookReview2 = new BookReview(book2);
         bookReview2.updateRating(9.0);
 
-        Book book3 = new Book(3, "Vladimir Nabokov", "Lolita", "Erotic literature", 400);
+        Book book3 = new Book( "Vladimir Nabokov", "Lolita", "Erotic literature", 400);
         BookReview bookReview3 = new BookReview(book3);
         bookReview3.updateRating(6.0);
 

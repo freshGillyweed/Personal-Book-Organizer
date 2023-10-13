@@ -1,5 +1,6 @@
 package model;
 
+// represents a bookmark having a book and the page the user must resume from
 public class Bookmark {
     private Book book;
     private int currentPage;

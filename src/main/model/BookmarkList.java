@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// represents a list of bookmarks
 public class BookmarkList {
     private List<Bookmark> bookmarkList;
 

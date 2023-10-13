@@ -1,23 +1,18 @@
 package model;
 
+// Represents a book having an author, title, genre, and totalPages
 public class Book {
-    private int bookID;
     private String author;
     private String title;
     private String genre;
     private int totalPages;
 
     // REQUIRES: totalPages > 1
-    public Book(int bookID, String author, String title, String genre, int totalPages) {
-        this.bookID = bookID;
+    public Book(String author, String title, String genre, int totalPages) {
         this.author = author;
         this.title = title;
         this.genre = genre;
         this.totalPages = totalPages;
-    }
-
-    int getBookID() {
-        return this.bookID;
     }
 
     public String getAuthor() {

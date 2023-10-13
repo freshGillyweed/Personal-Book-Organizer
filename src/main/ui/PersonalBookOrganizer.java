@@ -5,6 +5,7 @@ import model.*;
 import java.util.List;
 import java.util.Scanner;
 
+// Personal Book Organizer app
 public class PersonalBookOrganizer {
     private BookmarkList myBookmarkList;
     private BookReviewList myBookReviewList;
@@ -28,15 +29,13 @@ public class PersonalBookOrganizer {
         boolean flag = true;
         int command;
         int keepGoing = 1;
-        int bookID = 0;
-        int bookWishListIndex = 0;
         while (flag) {
             displayMenu();
             command = input.nextInt();
             input.nextLine();
 
             System.out.println("\n*********************************************************************************");
-            processCommand(command, bookID, bookWishListIndex);
+            processCommand(command);
             System.out.println("\n*********************************************************************************");
 
             System.out.print("\nType 1 to continue, 0 to quit: ");
@@ -50,10 +49,10 @@ public class PersonalBookOrganizer {
 
     // MODIFIES: this
     // EFFECTS: processes user command
-    private void processCommand(int command, int bookID, int bookWishListIndex) {
+    private void processCommand(int command) {
         switch (command) {
             case 1:
-                addToProgressTracker(bookID++);
+                addToProgressTracker();
                 break;
             case 2:
                 checkLastPage();
@@ -62,7 +61,7 @@ public class PersonalBookOrganizer {
                 updateLastPage();
                 break;
             case 4:
-                addToBookWishList(bookWishListIndex++);
+                addToBookWishList();
                 break;
             case 5:
                 displayBookWishList();
@@ -89,7 +88,7 @@ public class PersonalBookOrganizer {
     }
 
     // EFFECTS: gets input from user to create a new Book object and returns it
-    private Book getNewBook(int bookID) {
+    private Book getNewBook() {
         String author;
         String title;
         String genre;
@@ -106,14 +105,14 @@ public class PersonalBookOrganizer {
         input.nextLine();
         System.out.print("Type in total number of pages: ");
         totalPages = input.nextInt();
-        return new Book(bookID, author,title,genre,totalPages);
+        return new Book(author,title,genre,totalPages);
     }
 
     // MODIFIES: this
     // EFFECTS: constructs a new Bookmark object and appends it to myBookmarkList
-    private void addToProgressTracker(int bookID) {
+    private void addToProgressTracker() {
         System.out.println("\nAdding a new book to progress tracker...\n");
-        Book newBook = getNewBook(bookID);
+        Book newBook = getNewBook();
         Bookmark newBookmark = new Bookmark(newBook);
         myBookmarkList.addBookmark(newBookmark);
     }
@@ -170,9 +169,9 @@ public class PersonalBookOrganizer {
 
     // MODIFIES: this
     // EFFECTS: gets a new Book object and adds it to myBookWishList
-    private void addToBookWishList(int bookWishListIndex) {
+    private void addToBookWishList() {
         System.out.println("\nAdding a new book to wishlist...\n");
-        Book newBook = getNewBook(bookWishListIndex);
+        Book newBook = getNewBook();
         myBookWishList.addBook(newBook);
     }
 
