@@ -29,10 +29,19 @@ public class BookReviewListTest {
         bookReview1.updateNumberOfTimesRead();
         bookReview1.updateReview("A soft yet ruthless introduction to dystopian novels");
         testBookReviewList.addBookReview(bookReview1);
+
+        Book book2 = new Book("Louis Lowry", "The Giver", "Science fiction", 250);
+        BookReview bookReview2 = new BookReview(book1);
+        bookReview2.updateRating(9.0);
+        bookReview2.updateNumberOfTimesRead();
+        bookReview2.updateReview("Never gets old");
+        testBookReviewList.addBookReview(bookReview2);
+
         List<BookReview> returnedList = testBookReviewList.getBookReviewList();
-        assertEquals(bookReview1,returnedList.get(0));
+        assertEquals(bookReview2,returnedList.get(0));
         assertEquals(1,returnedList.size());
     }
+
 
     @Test
     void testGetHighRatedBooks() {
@@ -86,7 +95,7 @@ public class BookReviewListTest {
     void testGetFavoriteBook() {
         Book book1 = new Book( "Louis Lowry", "The Giver", "Science fiction", 250);
         BookReview bookReview1 = new BookReview(book1);
-        bookReview1.updateRating(9.0);
+        bookReview1.updateRating(8.0);
 
         Book book2 = new Book( "S.E. Hinton", "The Outsiders", "Young adult fiction", 200);
         BookReview bookReview2 = new BookReview(book2);
@@ -101,6 +110,6 @@ public class BookReviewListTest {
         testBookReviewList.addBookReview(bookReview3);
 
         Book returnedBook = testBookReviewList.getFavoriteBook();
-        assertEquals(book1,returnedBook);
+        assertEquals(book2,returnedBook);
     }
 }
