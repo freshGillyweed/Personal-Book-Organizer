@@ -29,6 +29,12 @@ class BookmarkListTest {
         testBookmarkList.addBookmark(bookmark1);
         testBookmarkList.addBookmark(bookmark2);
         assertEquals(2, (testBookmarkList.getBookmarkList()).size());
+        List<Bookmark> returnedList = testBookmarkList.getBookmarkList();
+        Book b1 = (returnedList.get(0)).getBook();
+        assertEquals(book1.getAuthor(),b1.getAuthor());
+        assertEquals(book1.getTitle(),b1.getTitle());
+        assertEquals(book1.getGenre(),b1.getGenre());
+        assertEquals(book1.getTotalPages(),b1.getTotalPages());
     }
 
     @Test
