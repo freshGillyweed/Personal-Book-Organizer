@@ -50,7 +50,7 @@ public class BookReviewList {
     }
 
     // EFFECTS: return the book with the highest rating
-    // If several books share the highest rating, return the one that has been added to the list first
+    // If several books share the highest rating, return the one was added to the list first
     public Book getFavoriteBook() {
         BookReview highestRated = bookReviewList.get(0);
         for (BookReview reviewedBook:bookReviewList) {

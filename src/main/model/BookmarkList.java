@@ -10,6 +10,8 @@ public class BookmarkList {
         bookmarkList = new ArrayList<>();
     }
 
+    // MODIFIES: this
+    // EFFECTS: A Bookmark object is added to bookmarkList
     public void addBookmark(Bookmark bookmark) {
         bookmarkList.add(bookmark);
     }

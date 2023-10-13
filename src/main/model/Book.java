@@ -7,6 +7,7 @@ public class Book {
     private String genre;
     private int totalPages;
 
+    // REQUIRES: totalPages > 1
     public Book(int bookID, String author, String title, String genre, int totalPages) {
         this.bookID = bookID;
         this.author = author;

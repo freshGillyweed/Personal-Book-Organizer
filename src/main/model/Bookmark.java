@@ -9,10 +9,10 @@ public class Bookmark {
         this.currentPage = 1;
     }
 
-    // REQUIRES: page > 0
+    // REQUIRES: page > 1
     // MODIFIES: this
     // EFFECTS: the bookmark's page is updated
-    // to show which page the reader must return to
+    //          to show which page the reader must resume reading
     public void updatePage(int page) {
         this.currentPage = page;
     }
