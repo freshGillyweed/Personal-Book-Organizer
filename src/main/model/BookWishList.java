@@ -18,7 +18,7 @@ public class BookWishList {
         }
     }
 
-    List<Book> getBookWishList() {
+    public List<Book> getBookWishList() {
         return this.bookWishList;
     }
 }

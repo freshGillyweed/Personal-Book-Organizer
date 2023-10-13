@@ -19,11 +19,11 @@ public class Book {
         return this.bookID;
     }
 
-    String getAuthor() {
+    public String getAuthor() {
         return this.author;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return this.title;
     }
 
@@ -31,7 +31,7 @@ public class Book {
         return this.genre;
     }
 
-    int getTotalPages() {
+    public int getTotalPages() {
         return this.totalPages;
     }
 }

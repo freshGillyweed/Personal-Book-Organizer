@@ -18,12 +18,12 @@ public class Bookmark {
     }
 
     // EFFECTS: the book that is bookmarked is returned
-    Book getBook() {
+    public Book getBook() {
         return this.book;
     }
 
     // EFFECTS: the page that the reader must resume on is returned
-    int getCurrentPage() {
+    public int getCurrentPage() {
         return this.currentPage;
     }
 }

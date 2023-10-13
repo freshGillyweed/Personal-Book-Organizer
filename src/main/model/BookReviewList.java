@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookReviewList {
-    List<BookReview> bookReviewList;
+    private List<BookReview> bookReviewList;
 
     public BookReviewList() {
         bookReviewList = new ArrayList<>();
@@ -26,7 +26,7 @@ public class BookReviewList {
     }
 
     // EFFECTS: A list of books with a rating of 6.0 or higher is returned
-    List<BookReview> getHighRatedBooks() {
+    public List<BookReview> getHighRatedBooks() {
         List<BookReview> highRatedBooks = new ArrayList<>();
 
         for (BookReview reviewedBook:bookReviewList) {
@@ -38,7 +38,7 @@ public class BookReviewList {
     }
 
     //EFFECTS: A list of books with a rating lower than 5.0 is returned
-    List<BookReview> getLowRatedBooks() {
+    public List<BookReview> getLowRatedBooks() {
         List<BookReview> lowRatedBooks = new ArrayList<>();
 
         for (BookReview reviewedBook:bookReviewList) {
@@ -51,7 +51,7 @@ public class BookReviewList {
 
     // EFFECTS: return the book with the highest rating
     // If several books share the highest rating, return the one that has been added to the list first
-    Book getFavoriteBook() {
+    public Book getFavoriteBook() {
         BookReview highestRated = bookReviewList.get(0);
         for (BookReview reviewedBook:bookReviewList) {
             if (reviewedBook.getRating() > highestRated.getRating()) {
@@ -62,7 +62,7 @@ public class BookReviewList {
     }
 
     //EFFECTS: a list of book reviews is returned
-    List<BookReview> getBookReviewList() {
+    public List<BookReview> getBookReviewList() {
         return this.bookReviewList;
     }
 }

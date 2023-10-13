@@ -14,7 +14,7 @@ public class BookReview {
 
     // MODIFIES: this
     // EFFECTS: adds/updates a rating for a certain book
-    void updateRating(double myRating) {
+    public void updateRating(double myRating) {
         this.rating = myRating;
     }
 
@@ -26,17 +26,17 @@ public class BookReview {
 
     // MODIFIES: this
     // EFFECTS: adds/updates the review of a book
-    void updateReview(String myReview) {
+    public void updateReview(String myReview) {
         this.review = myReview;
     }
 
     // EFFECTS: returns the reviewed book
-    Book getBook() {
+    public Book getBook() {
         return this.book;
     }
 
     // EFFECTS: returns the rating of a reviewed book
-    double getRating() {
+    public double getRating() {
         return this.rating;
     }
 
@@ -46,7 +46,7 @@ public class BookReview {
     }
 
     // EFFECTS: returns the review of a reviewed book
-    String getReview() {
+    public String getReview() {
         return this.review;
     }
 }

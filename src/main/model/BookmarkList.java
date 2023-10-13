@@ -10,7 +10,7 @@ public class BookmarkList {
         bookmarkList = new ArrayList<>();
     }
 
-    void addBookmark(Bookmark bookmark) {
+    public void addBookmark(Bookmark bookmark) {
         bookmarkList.add(bookmark);
     }
 
@@ -27,7 +27,7 @@ public class BookmarkList {
     }
 
     // EFFECTS: a list of bookmarks is returned
-    List<Bookmark> getBookmarkList() {
+    public List<Bookmark> getBookmarkList() {
         return this.bookmarkList;
     }
 }
