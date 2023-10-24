@@ -12,3 +12,5 @@
 - As a user, I would like to add a rating and short review for a book I finish reading.
 - As a user, I would like to see a list of books that have been given high/low ratings.
 - As a user, I would like to check my favourite book.
+- As a user, when I select the quit option from the application menu, I want to be reminded to save my BookmarkList, BookReviewList, and BookWishList to file and have the option to do so or not.
+- As a user, when I start the application, I want to be given the option to load my BookmarkList, BookReviewList, and BookWishList from file. 
