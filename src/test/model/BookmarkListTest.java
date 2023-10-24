@@ -52,5 +52,17 @@ class BookmarkListTest {
         returnedList = testBookmarkList.getBookmarkList();
         assertEquals(35,(returnedList.get(0).getCurrentPage()));
     }
+
+    @Test
+    void testUpdateBookmarkNotFound() {
+        Book book1 = new Book( "Louis Lowry", "The Giver", "Science fiction", 250);
+        Bookmark bookmark1 = new Bookmark(book1);
+        testBookmarkList.addBookmark(bookmark1);
+        List<Bookmark> returnedList = testBookmarkList.getBookmarkList();
+        assertEquals(1,(returnedList.get(0).getCurrentPage()));
+        testBookmarkList.updateBookmark("The Liver",35);
+        returnedList = testBookmarkList.getBookmarkList();
+        assertEquals(1,(returnedList.get(0).getCurrentPage()));
+    }
 }
 
