@@ -11,13 +11,15 @@ import java.util.Scanner;
 
 // Personal Book Organizer app
 public class PersonalBookOrganizer {
-    private static final String JSON_STORE = "./data/bookmarklist.json";
+    private static final String JSON_STORE_BML = "./data/bookmarklist.json";
+    private static final String JSON_STORE_BWL = "./data/bookWishlist.json";
     private BookmarkList myBookmarkList;
     private BookReviewList myBookReviewList;
     private BookWishList myBookWishList;
     private Scanner input;
-    private JsonWriterBookmarkList jsonWriter;
-    private JsonReaderBookmarkList jsonReader;
+    private JsonWriterBookmarkList jsonWriterBookmarkList;
+    private JsonReaderBookmarkList jsonReaderBookmarkList;
+
 
     // MODIFIES: this
     // EFFECTS: Instantiates objects and runs the PersonalBookOrganizer application
@@ -27,8 +29,8 @@ public class PersonalBookOrganizer {
         myBookmarkList = new BookmarkList();
         myBookReviewList = new BookReviewList();
         myBookWishList = new BookWishList();
-        jsonWriter = new JsonWriterBookmarkList(JSON_STORE);
-        jsonReader = new JsonReaderBookmarkList(JSON_STORE);
+        jsonWriterBookmarkList = new JsonWriterBookmarkList(JSON_STORE_BML);
+        jsonReaderBookmarkList = new JsonReaderBookmarkList(JSON_STORE_BML);
         runPersonalBookOrganizer();
     }
 
@@ -90,8 +92,8 @@ public class PersonalBookOrganizer {
         System.out.println("5. View my book wishlist");
         System.out.println("6. View a list of books with high/low ratings");
         System.out.println("7. Check my favorite book");
-        System.out.println("8. Save bookmark list to file");
-        System.out.println("9. Load bookmark list from file");
+        System.out.println("8. Save bookmark list and book wishlist to file");
+        System.out.println("9. Load bookmark list and book wishlist from file");
         System.out.print("\nChoose desired action : ");
     }
 
@@ -243,21 +245,23 @@ public class PersonalBookOrganizer {
 
     private void saveBookmarkList() {
         try {
-            jsonWriter.open();
-            jsonWriter.write(myBookmarkList);
-            jsonWriter.close();
-            System.out.println("Saved bookmark list" + " to " + JSON_STORE);
+            jsonWriterBookmarkList.open();
+            jsonWriterBookmarkList.write(myBookmarkList);
+            jsonWriterBookmarkList.close();
+            System.out.println("Saved bookmark list" + " to " + JSON_STORE_BML);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            System.out.println("Unable to write to file: " + JSON_STORE_BML);
         }
     }
 
     private void loadBookmarkList() {
         try {
-            myBookmarkList = jsonReader.read();
-            System.out.println("Loaded bookmark list" + " from " + JSON_STORE);
+            myBookmarkList = jsonReaderBookmarkList.read();
+            System.out.println("Loaded bookmark list" + " from " + JSON_STORE_BML);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            System.out.println("Unable to read from file: " + JSON_STORE_BML);
         }
     }
+
+
 }

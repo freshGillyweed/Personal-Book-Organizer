@@ -12,5 +12,5 @@
 - As a user, I would like to add a rating and short review for a book I finish reading.
 - As a user, I would like to see a list of books that have been given high/low ratings.
 - As a user, I would like to check my favourite book.
-- As a user, I would like to have the option to save my BookmarkList, BookReviewList, and BookWishList to file.
-- As a user, I would like to have the option to load my BookmarkList, BookReviewList, and BookWishList from file. 
+- As a user, I would like to have the option to save my BookmarkList to file.
+- As a user, I would like to have the option to load my BookmarkList from file. 

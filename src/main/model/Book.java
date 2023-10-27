@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents a book having an author, title, genre, and totalPages
 public class Book {
     private String author;
@@ -29,5 +31,14 @@ public class Book {
 
     public int getTotalPages() {
         return this.totalPages;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Title", title);
+        json.put("Author", author);
+        json.put("Genre", genre);
+        json.put("Total pages", totalPages);
+        return json;
     }
 }
