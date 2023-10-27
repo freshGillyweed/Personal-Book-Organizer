@@ -12,16 +12,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-// Represents a reader that reads workroom from JSON data stored in file
-public class JsonReader {
+// Code influenced by the JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+// Represents a reader that reads bookmarkList from JSON data stored in file
+public class JsonReaderBookmarkList {
     private String source;
 
     // EFFECTS: constructs reader to read from source file
-    public JsonReader(String source) {
+    public JsonReaderBookmarkList(String source) {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads bookmarkList from file and returns it;
     // throws IOException if an error occurs reading data from file
     public BookmarkList read() throws IOException {
         String jsonData = readFile(source);
@@ -40,14 +41,14 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses bookmarkList from JSON object and returns it
     private BookmarkList parseBookmarkList(JSONObject jsonObject) {
         BookmarkList bml = new BookmarkList();
         addBookmarks(bml, jsonObject);
         return bml;
     }
 
-    // MODIFIES: wr
+    // MODIFIES: bml
     // EFFECTS: parses bookmarks from JSON object and adds them to bookmarklist
     private void addBookmarks(BookmarkList bml, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Bookmarks");
@@ -57,7 +58,7 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
+    // MODIFIES: bml
     // EFFECTS: parses bookmark from JSON object and adds it to bookmarklist
     private void addBookmark(BookmarkList bml, JSONObject jsonObject) {
         String title = jsonObject.getString("Title");

@@ -1,8 +1,8 @@
 package ui;
 
 import model.*;
-import persistence.JsonReader;
-import persistence.JsonWriter;
+import persistence.JsonReaderBookmarkList;
+import persistence.JsonWriterBookmarkList;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,8 +16,8 @@ public class PersonalBookOrganizer {
     private BookReviewList myBookReviewList;
     private BookWishList myBookWishList;
     private Scanner input;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private JsonWriterBookmarkList jsonWriter;
+    private JsonReaderBookmarkList jsonReader;
 
     // MODIFIES: this
     // EFFECTS: Instantiates objects and runs the PersonalBookOrganizer application
@@ -27,8 +27,8 @@ public class PersonalBookOrganizer {
         myBookmarkList = new BookmarkList();
         myBookReviewList = new BookReviewList();
         myBookWishList = new BookWishList();
-        jsonWriter = new JsonWriter(JSON_STORE);
-        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriterBookmarkList(JSON_STORE);
+        jsonReader = new JsonReaderBookmarkList(JSON_STORE);
         runPersonalBookOrganizer();
     }
 

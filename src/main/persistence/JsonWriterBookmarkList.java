@@ -6,14 +6,15 @@ import org.json.JSONObject;
 
 import java.io.*;
 
-// Represents a writer that writes JSON representation of workroom to file
-public class JsonWriter {
+// Code influenced by the JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+// Represents a writer that writes JSON representation of bookmarkList to file
+public class JsonWriterBookmarkList {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String destination;
 
     // EFFECTS: constructs writer to write to destination file
-    public JsonWriter(String destination) {
+    public JsonWriterBookmarkList(String destination) {
         this.destination = destination;
     }
 
@@ -25,7 +26,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of bookmarkList to file
     public void write(BookmarkList bml) {
         JSONObject json = bml.toJson();
         saveToFile(json.toString(TAB));

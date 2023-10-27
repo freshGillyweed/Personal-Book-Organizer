@@ -9,11 +9,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JsonReaderTest extends JsonTest {
+// Code influenced by the JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+class JsonReaderBookmarkListTest extends JsonBookmarkListTest {
 
     @Test
     void testReaderNonExistentFile() {
-        JsonReader reader = new JsonReader("./data/noSuchFile.json");
+        JsonReaderBookmarkList reader = new JsonReaderBookmarkList("./data/noSuchFile.json");
         try {
             BookmarkList bml = reader.read();
             fail("IOException expected");
@@ -24,7 +25,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderEmptyBookmarkList() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyGeneralBookmarkList.json");
+        JsonReaderBookmarkList reader = new JsonReaderBookmarkList("./data/testReaderEmptyGeneralBookmarkList.json");
         try {
             BookmarkList bml = reader.read();
             assertEquals(0, (bml.getBookmarkList()).size());
@@ -35,16 +36,9 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderGeneralBookmarkList() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralWorkRoom.json");
+        JsonReaderBookmarkList reader = new JsonReaderBookmarkList("./data/testReaderGeneralBookmarkList.json");
         try {
             BookmarkList bml = reader.read();
-            //assertEquals("My work room", bml.getName());
-            /*WorkRoom wr = reader.read();
-            assertEquals("My work room", wr.getName());
-            List<Thingy> thingies = wr.getThingies();
-            assertEquals(2, thingies.size());
-            checkThingy("needle", Category.STITCHING, thingies.get(0));
-            checkThingy("saw", Category.WOODWORK, thingies.get(1));*/
             List<Bookmark> bookmarks = bml.getBookmarkList();
             assertEquals(2, bookmarks.size());
             Bookmark bookmark1 = bookmarks.get(0);
