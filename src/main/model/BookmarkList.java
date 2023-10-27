@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // represents a list of bookmarks
-public class BookmarkList {
+public class BookmarkList implements Writable {
     private List<Bookmark> bookmarkList;
 
     public BookmarkList() {
@@ -32,5 +36,22 @@ public class BookmarkList {
     // EFFECTS: a list of bookmarks is returned
     public List<Bookmark> getBookmarkList() {
         return this.bookmarkList;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        //json.put("name", name);
+        json.put("Bookmarks", bookmarksToJson());
+        return json;
+    }
+
+    private JSONArray bookmarksToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Bookmark bookmark : bookmarkList) {
+            jsonArray.put(bookmark.toJson());
+        }
+
+        return jsonArray;
     }
 }

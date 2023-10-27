@@ -1,16 +1,23 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 // Personal Book Organizer app
 public class PersonalBookOrganizer {
+    private static final String JSON_STORE = "./data/bookmarklist.json";
     private BookmarkList myBookmarkList;
     private BookReviewList myBookReviewList;
     private BookWishList myBookWishList;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // MODIFIES: this
     // EFFECTS: Instantiates objects and runs the PersonalBookOrganizer application
@@ -20,6 +27,8 @@ public class PersonalBookOrganizer {
         myBookmarkList = new BookmarkList();
         myBookReviewList = new BookReviewList();
         myBookWishList = new BookWishList();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runPersonalBookOrganizer();
     }
 
@@ -50,27 +59,24 @@ public class PersonalBookOrganizer {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(int command) {
-        switch (command) {
-            case 1:
-                addToProgressTracker();
-                break;
-            case 2:
-                checkLastPage();
-                break;
-            case 3:
-                updateLastPage();
-                break;
-            case 4:
-                addToBookWishList();
-                break;
-            case 5:
-                displayBookWishList();
-                break;
-            case 6:
-                displayBooksByRate();
-                break;
-            case 7:
-                displayFavoriteBook();
+        if (command == 1) {
+            addToProgressTracker();
+        } else if (command == 2) {
+            checkLastPage();
+        } else if (command == 3) {
+            updateLastPage();
+        } else if (command == 4) {
+            addToBookWishList();
+        } else if (command == 5) {
+            displayBookWishList();
+        } else if (command == 6) {
+            displayBooksByRate();
+        } else if (command == 7) {
+            displayFavoriteBook();
+        } else if (command == 8) {
+            saveBookmarkList();
+        } else {
+            loadBookmarkList();
         }
     }
 
@@ -84,6 +90,8 @@ public class PersonalBookOrganizer {
         System.out.println("5. View my book wishlist");
         System.out.println("6. View a list of books with high/low ratings");
         System.out.println("7. Check my favorite book");
+        System.out.println("8. Save bookmark list to file");
+        System.out.println("9. Load bookmark list from file");
         System.out.print("\nChoose desired action : ");
     }
 
@@ -231,5 +239,25 @@ public class PersonalBookOrganizer {
         System.out.println("\nDisplaying favorite book...\n");
         Book favoriteBook = myBookReviewList.getFavoriteBook();
         System.out.println("Your favorite book: \"" + favoriteBook.getTitle() + "\" by " + favoriteBook.getAuthor());
+    }
+
+    private void saveBookmarkList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myBookmarkList);
+            jsonWriter.close();
+            System.out.println("Saved bookmark list" + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    private void loadBookmarkList() {
+        try {
+            myBookmarkList = jsonReader.read();
+            System.out.println("Loaded bookmark list" + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
