@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // represents a wishlist of books
-public class BookWishList {
+public class BookWishList implements Writable {
     private List<Book> bookWishList;
 
     public BookWishList() {
@@ -25,5 +25,21 @@ public class BookWishList {
 
     public List<Book> getBookWishList() {
         return this.bookWishList;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Wish books", wishBooksToJson());
+        return json;
+    }
+
+    private JSONArray wishBooksToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Book book : bookWishList) {
+            jsonArray.put(book.toJson());
+        }
+
+        return jsonArray;
     }
 }

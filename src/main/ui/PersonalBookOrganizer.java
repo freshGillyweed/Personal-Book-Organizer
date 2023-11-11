@@ -1,8 +1,7 @@
 package ui;
 
 import model.*;
-import persistence.JsonReaderBookmarkList;
-import persistence.JsonWriterBookmarkList;
+import persistence.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,12 +12,17 @@ import java.util.Scanner;
 public class PersonalBookOrganizer {
     private static final String JSON_STORE_BML = "./data/bookmarklist.json";
     private static final String JSON_STORE_BWL = "./data/bookWishlist.json";
+    private static final String JSON_STORE_BRL = "./data/bookReviewlist.json";
     private BookmarkList myBookmarkList;
     private BookReviewList myBookReviewList;
     private BookWishList myBookWishList;
     private Scanner input;
     private JsonWriterBookmarkList jsonWriterBookmarkList;
     private JsonReaderBookmarkList jsonReaderBookmarkList;
+    private JsonWriterBookWishList jsonWriterBookWishList;
+    private JsonReaderBookWishList jsonReaderBookWishList;
+    private JsonReaderBookReviewList jsonReaderBookReviewList;
+    private JsonWriterBookReviewList jsonWriterBookReviewList;
 
 
     // MODIFIES: this
@@ -31,6 +35,11 @@ public class PersonalBookOrganizer {
         myBookWishList = new BookWishList();
         jsonWriterBookmarkList = new JsonWriterBookmarkList(JSON_STORE_BML);
         jsonReaderBookmarkList = new JsonReaderBookmarkList(JSON_STORE_BML);
+        jsonWriterBookWishList = new JsonWriterBookWishList(JSON_STORE_BWL);
+        jsonReaderBookWishList = new JsonReaderBookWishList(JSON_STORE_BWL);
+        jsonWriterBookReviewList = new JsonWriterBookReviewList(JSON_STORE_BRL);
+        jsonReaderBookReviewList = new JsonReaderBookReviewList(JSON_STORE_BRL);
+
         runPersonalBookOrganizer();
     }
 
@@ -76,25 +85,45 @@ public class PersonalBookOrganizer {
         } else if (command == 7) {
             displayFavoriteBook();
         } else if (command == 8) {
-            saveBookmarkList();
+            saveAll();
+        } else if (command == 9) {
+            loadAll();;
+        } else if (command == 10) {
+            displayBookmarkList();
         } else {
-            loadBookmarkList();
+            displayBookReviewList();
         }
     }
 
     // EFFECTS: displays a menu of options to user
     private void displayMenu() {
         System.out.println("\n*********************************************************************************\n");
-        System.out.println("1. Add a new book to progress tracker");
+        System.out.println("1. Add a new book to bookmark list");
         System.out.println("2. Check where I last left off");
         System.out.println("3. Update where I last left off");
         System.out.println("4. Add a new book to wishlist");
         System.out.println("5. View my book wishlist");
         System.out.println("6. View a list of books with high/low ratings");
         System.out.println("7. Check my favorite book");
-        System.out.println("8. Save bookmark list and book wishlist to file");
-        System.out.println("9. Load bookmark list and book wishlist from file");
+        System.out.println("8. Save bookmarks, book wish list, and book reviews to file");
+        System.out.println("9. Load bookmarks, book wish list, and book reviews from file");
+        System.out.println("10. View my bookmark list");
+        System.out.println("11. View my book reviews");
         System.out.print("\nChoose desired action : ");
+    }
+
+    // EFFECTS: saves lists for bookmark, wishbooks, and bookreviews to file
+    private void saveAll() {
+        saveBookmarkList();
+        saveBookWishList();
+        saveBookReviewList();
+    }
+
+    // EFFECTS: loads lists for bookmark, wishbooks, and bookreviews from file
+    private void loadAll() {
+        loadBookmarkList();
+        loadBookWishList();
+        loadBookReviewList();
     }
 
     // EFFECTS: gets input from user to create a new Book object and returns it
@@ -201,6 +230,7 @@ public class PersonalBookOrganizer {
         newBookReview.updateReview(myReview);
 
         myBookReviewList.addBookReview(newBookReview);
+        myBookmarkList.removeBookmark((newBookReview.getBook()).getTitle());
     }
 
     // EFFECTS: Displays a list of Book objects in BookWishList
@@ -243,6 +273,7 @@ public class PersonalBookOrganizer {
         System.out.println("Your favorite book: \"" + favoriteBook.getTitle() + "\" by " + favoriteBook.getAuthor());
     }
 
+    // EFFECTS: displays bookmark list
     private void saveBookmarkList() {
         try {
             jsonWriterBookmarkList.open();
@@ -254,6 +285,31 @@ public class PersonalBookOrganizer {
         }
     }
 
+    // EFFECTS: displays book wish list
+    private void saveBookWishList() {
+        try {
+            jsonWriterBookWishList.open();
+            jsonWriterBookWishList.write(myBookWishList);
+            jsonWriterBookWishList.close();
+            System.out.println("Saved book wishlist" + " to " + JSON_STORE_BWL);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE_BWL);
+        }
+    }
+
+    // EFFECTS: displays book review list
+    private void saveBookReviewList() {
+        try {
+            jsonWriterBookReviewList.open();
+            jsonWriterBookReviewList.write(myBookReviewList);
+            jsonWriterBookReviewList.close();
+            System.out.println("Saved book review list" + " to " + JSON_STORE_BRL);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE_BRL);
+        }
+    }
+
+    // EFFECTS: loads bookmark list
     private void loadBookmarkList() {
         try {
             myBookmarkList = jsonReaderBookmarkList.read();
@@ -263,5 +319,48 @@ public class PersonalBookOrganizer {
         }
     }
 
+    // EFFECTS: loads book wish list
+    private void loadBookWishList() {
+        try {
+            myBookWishList = jsonReaderBookWishList.read();
+            System.out.println("Loaded book wishlist" + " from " + JSON_STORE_BWL);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE_BWL);
+        }
+    }
 
+    // EFFECTS: loads book review list
+    private void loadBookReviewList() {
+        try {
+            myBookReviewList = jsonReaderBookReviewList.read();
+            System.out.println("Loaded book review list" + " from " + JSON_STORE_BRL);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE_BRL);
+        }
+    }
+
+    // EFFECTS: displays bookmark list
+    private void displayBookmarkList() {
+        System.out.println("\nDisplaying bookmark list...\n");
+        List<Bookmark> bookmarks = myBookmarkList.getBookmarkList();
+        for (Bookmark bookmark : bookmarks) {
+            Book book = bookmark.getBook();
+            System.out.println("\nAuthor: " + book.getAuthor());
+            System.out.println("Title: " + book.getTitle());
+            System.out.println(bookmark.getCurrentPage() + " page(s) read out of " + book.getTotalPages() + " pages\n");
+        }
+    }
+
+    // EFFECTS: displays book review list
+    private void displayBookReviewList() {
+        System.out.println("\nDisplaying book review list...\n");
+        List<BookReview> bookReviews = myBookReviewList.getBookReviewList();
+        for (BookReview review: bookReviews) {
+            Book book = review.getBook();
+            System.out.println("\nAuthor: " + book.getAuthor());
+            System.out.println("Title: " + book.getTitle());
+            System.out.println("Rating: " + review.getRating());
+            System.out.println("Short review: " + review.getReview() + "\n");
+        }
+    }
 }

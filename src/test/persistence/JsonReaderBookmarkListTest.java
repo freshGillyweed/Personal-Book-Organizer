@@ -39,12 +39,16 @@ class JsonReaderBookmarkListTest extends JsonBookmarkListTest {
         JsonReaderBookmarkList reader = new JsonReaderBookmarkList("./data/testReaderGeneralBookmarkList.json");
         try {
             BookmarkList bml = reader.read();
+            List<Bookmark> testReaderBML = bml.getBookmarkList();
             List<Bookmark> bookmarks = bml.getBookmarkList();
             assertEquals(2, bookmarks.size());
+            assertEquals(testReaderBML.size(), bookmarks.size());
             Bookmark bookmark1 = bookmarks.get(0);
             Bookmark bookmark2 = bookmarks.get(1);
-            checkBookmark(bookmark1.getBook(), bookmark1.getCurrentPage(), bookmark1);
-            checkBookmark(bookmark2.getBook(), bookmark2.getCurrentPage(), bookmark2);
+            Bookmark readerBookmark1 = testReaderBML.get(0);
+            Bookmark readerBookmark2 = testReaderBML.get(1);
+            checkBookmark(readerBookmark1.getBook(), readerBookmark1.getCurrentPage(), bookmark1);
+            checkBookmark(readerBookmark2.getBook(), readerBookmark2.getCurrentPage(), bookmark2);
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

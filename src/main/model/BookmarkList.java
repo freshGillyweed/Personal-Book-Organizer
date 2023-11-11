@@ -33,6 +33,15 @@ public class BookmarkList implements Writable {
         }
     }
 
+    public void removeBookmark(String bookTitle) {
+        for (Bookmark bookmark:bookmarkList) {
+            if (bookTitle.equals((bookmark.getBook()).getTitle())) {
+                bookmarkList.remove(bookmark);
+                return;
+            }
+        }
+    }
+
     // EFFECTS: a list of bookmarks is returned
     public List<Bookmark> getBookmarkList() {
         return this.bookmarkList;

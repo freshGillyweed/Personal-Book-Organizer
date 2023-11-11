@@ -1,14 +1,18 @@
-{"Wish books": [
+{"Book reviews": [
   {
     "Total pages": 100,
+    "Rating": 0,
     "Title": "The Giver",
     "Author": "Louis Lowry",
-    "Genre": "Science fiction"
+    "Genre": "Science fiction",
+    "Review": "No review yet"
   },
   {
     "Total pages": 200,
+    "Rating": 0,
     "Title": "The Outsiders",
     "Author": "S.E. Hinton",
-    "Genre": "Young adult fiction"
+    "Genre": "Young adult fiction",
+    "Review": "No review yet"
   }
 ]}

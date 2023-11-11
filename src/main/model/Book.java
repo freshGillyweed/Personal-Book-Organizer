@@ -32,4 +32,13 @@ public class Book {
     public int getTotalPages() {
         return this.totalPages;
     }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Title", this.getTitle());
+        json.put("Author", this.getAuthor());
+        json.put("Genre", this.getGenre());
+        json.put("Total pages", this.getTotalPages());
+        return json;
+    }
 }

@@ -1,6 +1,7 @@
 package persistence;
 
-import model.*;
+import model.Book;
+import model.BookWishList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,22 +11,20 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-// Code influenced by the JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-// Represents a reader that reads bookmarkList from JSON data stored in file
-public class JsonReaderBookmarkList {
+public class JsonReaderBookWishList {
     private String source;
 
     // EFFECTS: constructs reader to read from source file
-    public JsonReaderBookmarkList(String source) {
+    public JsonReaderBookWishList(String source) {
         this.source = source;
     }
 
-    // EFFECTS: reads bookmarkList from file and returns it;
+    // EFFECTS: reads bookWishList from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public BookmarkList read() throws IOException {
+    public BookWishList read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseBookmarkList(jsonObject);
+        return parseBookWishList(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -39,33 +38,32 @@ public class JsonReaderBookmarkList {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses bookmarkList from JSON object and returns it
-    private BookmarkList parseBookmarkList(JSONObject jsonObject) {
-        BookmarkList bml = new BookmarkList();
-        addBookmarks(bml, jsonObject);
-        return bml;
+    // EFFECTS: parses bookWishList from JSON object and returns it
+    private BookWishList parseBookWishList(JSONObject jsonObject) {
+        BookWishList bwl = new BookWishList();
+        addWishBooks(bwl, jsonObject);
+        return bwl;
     }
 
     // MODIFIES: bml
-    // EFFECTS: parses bookmarks from JSON object and adds them to bookmarklist
-    private void addBookmarks(BookmarkList bml, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("Bookmarks");
+    // EFFECTS: parses wish books from JSON object and adds them to bookWishlist
+    private void addWishBooks(BookWishList bwl, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("Wish books");
         for (Object json : jsonArray) {
-            JSONObject nextBookmark = (JSONObject) json;
-            addBookmark(bml, nextBookmark);
+            JSONObject nextBook = (JSONObject) json;
+            this.addWishBook(bwl, nextBook);
         }
     }
 
     // MODIFIES: bml
-    // EFFECTS: parses bookmark from JSON object and adds it to bookmarklist
-    private void addBookmark(BookmarkList brl, JSONObject jsonObject) {
+    // EFFECTS: parses book from JSON object and adds it to bookWishlist
+    private void addWishBook(BookWishList bwl, JSONObject jsonObject) {
         String title = jsonObject.getString("Title");
         String author = jsonObject.getString("Author");
         String genre = jsonObject.getString("Genre");
         int totalPages = jsonObject.getInt("Total pages");
 
         Book book = new Book(author, title, genre, totalPages);
-        Bookmark bookmark = new Bookmark(book);
-        brl.addBookmark(bookmark);
+        bwl.addBook(book);
     }
 }

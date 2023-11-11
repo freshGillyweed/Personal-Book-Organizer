@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // represents a list of book reviews
-public class BookReviewList {
+public class BookReviewList implements Writable {
     private List<BookReview> bookReviewList;
 
     public BookReviewList() {
@@ -65,5 +69,20 @@ public class BookReviewList {
     //EFFECTS: a list of book reviews is returned
     public List<BookReview> getBookReviewList() {
         return this.bookReviewList;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Book reviews", bookReviewsToJson());
+        return json;
+    }
+
+    private JSONArray bookReviewsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (BookReview bookReview : bookReviewList) {
+            jsonArray.put(bookReview.toJson());
+        }
+        return jsonArray;
     }
 }

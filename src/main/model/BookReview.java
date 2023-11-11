@@ -1,14 +1,17 @@
 package model;
 
+import org.json.JSONObject;
+
 // represents a book review having a book, rating,
 public class BookReview {
     private Book book;
     private double rating;
-    private String review = null;
+    private String review;
 
     public BookReview(Book book) {
         this.book = book;
         this.rating = 0.0;
+        this.review = "No review yet";
     }
 
     // MODIFIES: this
@@ -37,5 +40,16 @@ public class BookReview {
     // EFFECTS: returns the review of a reviewed book
     public String getReview() {
         return this.review;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Title", book.getTitle());
+        json.put("Author", book.getAuthor());
+        json.put("Genre", book.getGenre());
+        json.put("Rating", getRating());
+        json.put("Review", getReview());
+        json.put("Total pages", book.getTotalPages());
+        return json;
     }
 }
