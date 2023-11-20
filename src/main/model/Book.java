@@ -25,7 +25,7 @@ public class Book {
         return this.title;
     }
 
-    String getGenre() {
+    public String getGenre() {
         return this.genre;
     }
 

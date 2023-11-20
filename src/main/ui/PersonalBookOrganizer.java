@@ -3,6 +3,10 @@ package ui;
 import model.*;
 import persistence.*;
 
+import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -10,12 +14,18 @@ import java.util.Scanner;
 
 // Personal Book Organizer app
 public class PersonalBookOrganizer {
+    private JFrame frame;
+    private JPanel panel;
+    private JButton loadButton;
+    private JList list;
+    private DefaultListModel listModel;
+
     private static final String JSON_STORE_BML = "./data/bookmarklist.json";
     private static final String JSON_STORE_BWL = "./data/bookWishlist.json";
     private static final String JSON_STORE_BRL = "./data/bookReviewlist.json";
     private BookmarkList myBookmarkList;
     private BookReviewList myBookReviewList;
-    private BookWishList myBookWishList;
+    private BookWishList myBookWishList; //private, protected
     private Scanner input;
     private JsonWriterBookmarkList jsonWriterBookmarkList;
     private JsonReaderBookmarkList jsonReaderBookmarkList;
@@ -209,10 +219,55 @@ public class PersonalBookOrganizer {
     // MODIFIES: this
     // EFFECTS: gets a new Book object and adds it to myBookWishList
     private void addToBookWishList() {
+        /*frame = new JFrame("Personal Book Organizer: Book Wish List");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        panel = new JPanel();
+        loadButton = new JButton("Load Book Wish List from File");
+        loadButton.addActionListener(this);
+        panel.add(loadButton);
+
+        displayWishBooksPanel();
+
+        JButton addAuthor = new JButton("Add Author");
+        AuthorListener authorListener = new AuthorListener(addAuthor, list, listModel, myBookWishList);
+        addAuthor.setActionCommand("Add Author");
+        addAuthor.addActionListener(authorListener);
+        addAuthor.setEnabled(false);
+
+
+        String input = authorListener.getAuthor();
+        //If we just wanted to add to the end, we'd do this:
+        listModel.addElement(input);
+
+        //Also add book to book Wish list within code
+        //addWishBook(authorListener.getAuthor(), );
+        */
         System.out.println("\nAdding a new book to wishlist...\n");
         Book newBook = getNewBook();
         myBookWishList.addBook(newBook);
+        //myBookWishList.addBook(new Book(authorListener.getAuthor(),))
     }
+
+    /*private void displayWishBooksPanel() {
+        listModel = new DefaultListModel();
+        String str;
+
+        for (Book book:myBookWishList.getBookWishList()) {
+            str = book.getTitle() + " by " + book.getAuthor() + ", genre is " + book.getGenre();
+            listModel.addElement(str);
+        }
+
+
+        //Create the list and put it in a scroll pane.
+        list = new JList(listModel);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setSelectedIndex(0);
+        list.addListSelectionListener((ListSelectionListener) this);
+        list.setVisibleRowCount(5);
+        JScrollPane listScrollPane = new JScrollPane(list);
+    }
+    */
 
     // MODIFIES: this
     // EFFECTS: gets input from user to create a new BookReview object and adds it to myBookReviewList
@@ -363,4 +418,28 @@ public class PersonalBookOrganizer {
             System.out.println("Short review: " + review.getReview() + "\n");
         }
     }
+
+    /*
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // load book wish list from file
+        loadAll();
+
+        /*listModel = new DefaultListModel();
+        String str;
+
+        for (Book book:myBookWishList.getBookWishList()) {
+            str = book.getTitle() + " by " + book.getAuthor() + ", genre is " + book.getGenre();
+            listModel.addElement(str);
+        }
+
+        //Create the list and put it in a scroll pane.
+        list = new JList(listModel);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setSelectedIndex(0);
+        list.addListSelectionListener((ListSelectionListener) this);
+        list.setVisibleRowCount(5);
+        JScrollPane listScrollPane = new JScrollPane(list);
+    }
+    */
 }
