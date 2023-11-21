@@ -1,9 +1,8 @@
 package ui;
 
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AddWishBook extends JPanel {
     protected JTextField authorField;
@@ -11,6 +10,9 @@ public class AddWishBook extends JPanel {
     protected JTextField genreField;
     protected JTextField pageField;
     protected JTextArea textArea;
+
+    private boolean flag = false;
+    private GridBagConstraints c;
 
     private String author;
     private String title;
@@ -37,13 +39,19 @@ public class AddWishBook extends JPanel {
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
 
-        GridBagConstraints c = new GridBagConstraints();
+        c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.fill = GridBagConstraints.HORIZONTAL;
 
         JButton addButton = new JButton("Add New Book to Wish List");
         addButton.addActionListener(e -> addBookClicked());
         add(addButton, c);
+
+        /*
+        JButton loadButton = new JButton("Load Book Wish List from File");
+        loadButton.addActionListener(e -> loadButtonClicked());
+        add(loadButton, c);
+         */
 
         add(new JLabel("Author: "), c);
         add(authorField, c);
@@ -79,6 +87,7 @@ public class AddWishBook extends JPanel {
 
         // Check if both author and title are entered
         if (!author.isEmpty() && !title.isEmpty() && !genre.isEmpty() && !totalPages.isEmpty()) {
+            flag = true;
             addToTextArea("Author: " + author + "\nTitle: " + title
                     + "\nGenre: " + genre + "\nTotal Pages: " + totalPages + "\n\n");
 
@@ -90,12 +99,38 @@ public class AddWishBook extends JPanel {
         }
     }
 
-    private void addToTextArea(String text) {
+    public void addToTextArea(String text) {
         textArea.append(text);
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
 
-    private static void createAndShowGUI() {
+    public GridBagConstraints getGridBagConstraints() {
+        return c;
+    }
+
+    public String getInputAuthor() {
+        return author;
+    }
+
+    public String getInputTitle() {
+        return title;
+    }
+
+    public String getInputGenre() {
+        return genre;
+    }
+
+    public String getInputPage() {
+        return totalPages;
+    }
+
+    public boolean getFlag() {
+        return flag;
+    }
+
+    //abstract void loadButtonClicked() {};
+
+    public static void createAndShowGUI() {
         JFrame frame = new JFrame("Personal Book Organizer: My Book Wish List");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -106,9 +141,16 @@ public class AddWishBook extends JPanel {
         frame.setVisible(true);
     }
 
+    public JTextArea getTextArea() {
+        return textArea;
+    }
 
+
+    /*
     public static void main(String[] args) {
         SwingUtilities.invokeLater(AddWishBook::createAndShowGUI);
     }
+
+     */
 
 }
