@@ -19,36 +19,26 @@ public class AddWishBook extends JPanel {
 
     private GridBagConstraints gridBagConstraints;
 
-    private String author;
-    private String title;
-    private String genre;
-    private String totalPages;
-    private static final String newline = "\n";
-
     public AddWishBook(BookWishList bwl) {
         super(new GridBagLayout());
         this.bwl = bwl;
 
         authorField = new JTextField(20);
-        authorField.setEnabled(false);
-
         titleField = new JTextField(20);
-        titleField.setEnabled(false);
-
         genreField = new JTextField(20);
-        genreField.setEnabled(false);
-
         pageField = new JTextField(20);
-        pageField.setEnabled(false);
 
         textArea = new JTextArea(5, 20);
-        textArea.setEditable(false);
+
+        setTextFieldsEnabled();
 
         JScrollPane scrollPane = new JScrollPane(textArea);
 
         setUpGridBagConstraints1();
 
         JButton addButton = new JButton("Add New Book to Wish List");
+        ImageIcon bookIcon = new ImageIcon("images/bookIcon.png");
+        addButton.setIcon(bookIcon);
         addButton.addActionListener(e -> addBookClicked());
         add(addButton, gridBagConstraints);
 
@@ -64,17 +54,32 @@ public class AddWishBook extends JPanel {
         add(scrollPane, gridBagConstraints);
     }
 
+    // MODIFIES: this
+    // EFFECTS: disables the text fields
+    public void setTextFieldsEnabled() {
+        authorField.setEnabled(false);
+        titleField.setEnabled(false);
+        genreField.setEnabled(false);
+        pageField.setEnabled(false);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: performs basic setups for labels
     private void setUpLabel(JTextField textField, String label) {
         add(new JLabel(label), gridBagConstraints);
         add(textField, gridBagConstraints);
     }
 
+    // MODIFIES: this
+    // EFFECTS: performs initial setups for grid bag constraints
     private void setUpGridBagConstraints1() {
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
     }
 
+    // MODIFIES: this
+    // EFFECTS: performs posterior setups for grid bag constraints
     private void setUpGridBagConstraints2() {
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -93,10 +98,10 @@ public class AddWishBook extends JPanel {
             return;
         }
 
-        author = authorField.getText();
-        title = titleField.getText();
-        genre = genreField.getText();
-        totalPages = pageField.getText();
+        String author = authorField.getText();
+        String title = titleField.getText();
+        String genre = genreField.getText();
+        String totalPages = pageField.getText();
 
         Book newBook;
 
@@ -139,26 +144,4 @@ public class AddWishBook extends JPanel {
     public BookWishList getBwl() {
         return bwl;
     }
-
-    /*
-    public static void createAndShowGUI() {
-        JFrame frame = new JFrame("Personal Book Organizer: My Book Wish List");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        AddWishBook addWishBookUI = new AddWishBook();
-        frame.add(addWishBookUI);
-
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-     */
-
-    /*
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(AddWishBook::createAndShowGUI);
-    }
-
-     */
-
 }

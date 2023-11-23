@@ -229,6 +229,10 @@ public class PersonalBookOrganizer extends JPanel {
         //super.add(saveButton, gridBagConstraints);
         //userInterface.createAndShowGUI();
 
+        JButton subsetDisplayButton = new JButton("Display Books Over 200 Pages");
+        subsetDisplayButton.addActionListener(e -> subsetDisplayButtonClicked());
+        userInterface.addToFrame(subsetDisplayButton);
+
         JFrame frame = new JFrame("Personal Book Organizer: My Book Wish List");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(userInterface);
@@ -354,7 +358,7 @@ public class PersonalBookOrganizer extends JPanel {
     private void loadBookWishList() {
         try {
             myBookWishList = jsonReaderBookWishList.read();
-            System.out.println("Loaded book wishlist" + " from " + JSON_STORE_BWL);
+            System.out.println("\nLoaded book wishlist" + " from " + JSON_STORE_BWL);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE_BWL);
         }
@@ -411,5 +415,15 @@ public class PersonalBookOrganizer extends JPanel {
     private void saveButtonClicked() {
         myBookWishList = userInterface.getBwl();
         saveBookWishList();
+    }
+
+    private void subsetDisplayButtonClicked() {
+        for (Book book: myBookWishList.getBookWishList()) {
+            if (book.getTotalPages() > 200) {
+                userInterface.addToTextArea("***Over 200 Pages***\n");
+                userInterface.addToTextArea("Author: " + book.getAuthor() + "\nTitle: " + book.getTitle()
+                        + "\nGenre: " + book.getGenre() + "\n\n");
+            }
+        }
     }
 }
