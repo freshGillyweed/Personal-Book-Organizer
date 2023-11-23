@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 // Personal Book Organizer app
-public class PersonalBookOrganizer {
+public class PersonalBookOrganizer extends JPanel {
 
     private static final String JSON_STORE_BML = "./data/bookmarklist.json";
     private static final String JSON_STORE_BWL = "./data/bookWishlist.json";
@@ -26,6 +26,7 @@ public class PersonalBookOrganizer {
     private JsonReaderBookWishList jsonReaderBookWishList;
     private JsonReaderBookReviewList jsonReaderBookReviewList;
     private JsonWriterBookReviewList jsonWriterBookReviewList;
+    private AddWishBook userInterface;
 
 
     // MODIFIES: this
@@ -213,17 +214,19 @@ public class PersonalBookOrganizer {
     // EFFECTS: gets a new Book object and adds it to myBookWishList
     private void addToBookWishList() {
         System.out.println("\nAdding a new book to wishlist...\n");
+        System.out.println("\n");
+        loadBookWishList();
+        userInterface = new AddWishBook(myBookWishList);
 
-        AddWishBook userInterface = new AddWishBook();
+        JButton loadButton = new JButton("Load Book Wish List from File");
+        loadButton.addActionListener(e -> loadButtonClicked(userInterface));
+        //add(loadButton, gridBagConstraints);
+        userInterface.addToFrame(loadButton);
 
-        // Lines 220-225 should be in an if statement (execute when load button is pressed)
-        loadAll();
-
-        for (Book book: myBookWishList.getBookWishList()) {
-            userInterface.addToTextArea("Author: " + book.getAuthor() + "\nTitle: " + book.getTitle()
-                    + "\nGenre: " + book.getGenre() + "\nTotal Pages: " + book.getTotalPages() + "\n\n");
-        }
-
+        JButton saveButton = new JButton("Save Entries to File");
+        saveButton.addActionListener(e -> saveButtonClicked());
+        userInterface.addToFrame(saveButton);
+        //super.add(saveButton, gridBagConstraints);
         //userInterface.createAndShowGUI();
 
         JFrame frame = new JFrame("Personal Book Organizer: My Book Wish List");
@@ -231,25 +234,6 @@ public class PersonalBookOrganizer {
         frame.add(userInterface);
         frame.pack();
         frame.setVisible(true);
-
-        String author = userInterface.getInputAuthor();
-        String title = userInterface.getInputTitle();
-        String genre = userInterface.getInputGenre();
-        String totalPages = userInterface.getInputPage();
-
-        // loop until all inputs are received
-        boolean conditionMet = false;
-
-        while (!conditionMet) {
-            if (userInterface.getFlag()) {
-                conditionMet = true;
-            }
-        }
-
-        Book newBook = new Book(userInterface.getInputAuthor(), userInterface.getInputTitle(),
-                userInterface.getInputGenre(), Integer.parseInt(userInterface.getInputPage()));
-
-        myBookWishList.addBook(newBook);
 
 
 
@@ -411,4 +395,21 @@ public class PersonalBookOrganizer {
         }
     }
 
+    // EFFECTS: loads contents of myBookWishList from file and displays them on the textArea
+    private void loadButtonClicked(AddWishBook userInterface) {
+        loadBookWishList();
+
+        for (Book book: myBookWishList.getBookWishList()) {
+            userInterface.addToTextArea("***Loaded from File***\n");
+            userInterface.addToTextArea("Author: " + book.getAuthor() + "\nTitle: " + book.getTitle()
+                    + "\nGenre: " + book.getGenre() + "\nTotal Pages: " + book.getTotalPages() + "\n\n");
+        }
+        System.out.println("\n");
+    }
+
+    // EFFECTS; saves book wish list that includes books newly added using GUI
+    private void saveButtonClicked() {
+        myBookWishList = userInterface.getBwl();
+        saveBookWishList();
+    }
 }
