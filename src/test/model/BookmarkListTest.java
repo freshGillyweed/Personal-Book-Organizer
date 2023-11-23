@@ -75,6 +75,8 @@ class BookmarkListTest {
         testBookmarkList.addBookmark(bookmark2);
         testBookmarkList.removeBookmark("The Giver");
         assertEquals(1, (testBookmarkList.getBookmarkList()).size());
+        testBookmarkList.removeBookmark("The Giver");
+        assertEquals(1, (testBookmarkList.getBookmarkList()).size());
     }
 }
 
