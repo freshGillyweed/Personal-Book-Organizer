@@ -64,5 +64,17 @@ class BookmarkListTest {
         returnedList = testBookmarkList.getBookmarkList();
         assertEquals(1,(returnedList.get(0).getCurrentPage()));
     }
+
+    @Test
+    void testRemoveBookmark() {
+        Book book1 = new Book( "Louis Lowry", "The Giver", "Science fiction", 250);
+        Book book2 = new Book( "S.E. Hinton", "The Outsiders", "Young adult fiction", 140);
+        Bookmark bookmark1 = new Bookmark(book1);
+        Bookmark bookmark2 = new Bookmark(book2);
+        testBookmarkList.addBookmark(bookmark1);
+        testBookmarkList.addBookmark(bookmark2);
+        testBookmarkList.removeBookmark("The Giver");
+        assertEquals(1, (testBookmarkList.getBookmarkList()).size());
+    }
 }
 
