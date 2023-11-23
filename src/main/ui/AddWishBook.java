@@ -37,6 +37,7 @@ public class AddWishBook extends JPanel {
         setUpGridBagConstraints1();
 
         JButton addButton = new JButton("Add New Book to Wish List");
+        //icon cited: <a target="_blank" href="https://icons8.com/icon/l6iocFkbmCrh/book">Book</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
         ImageIcon bookIcon = new ImageIcon("images/bookIcon.png");
         addButton.setIcon(bookIcon);
         addButton.addActionListener(e -> addBookClicked());
