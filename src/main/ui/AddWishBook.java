@@ -3,9 +3,13 @@ package ui;
 
 import model.Book;
 import model.BookWishList;
+import model.Event;
+import model.EventLog;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 // represents components of  UI that pertains to book wish list
 public class AddWishBook extends JPanel {
@@ -113,7 +117,7 @@ public class AddWishBook extends JPanel {
                     + "\nGenre: " + genre + "\nTotal Pages: " + totalPages + "\n\n");
 
             newBook = new Book(author, title, genre, Integer.parseInt(totalPages));
-            bwl.addBook(newBook);
+            bwl.addBook(newBook, true);
 
             clearInputField();
         }
@@ -144,5 +148,26 @@ public class AddWishBook extends JPanel {
     // EFFECTS: returns the book wish list that includes newly added books
     public BookWishList getBwl() {
         return bwl;
+    }
+
+    // EFFECTS: performs setup for frame and window operations
+    public void setupFrame(String title) {
+        JFrame frame = new JFrame(title);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                EventLog eventLog = EventLog.getInstance();
+                for (Event next : eventLog) {
+                    System.out.println("\n");
+                    System.out.println(next.toString() + "\n");
+                }
+                frame.dispose();
+                System.exit(0);
+            }
+        });
+        frame.add(this);
+        frame.pack();
+        frame.setVisible(true);
     }
 }

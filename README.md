@@ -46,3 +46,13 @@
 - 2. Add a few books
 - 3. Save entries by clicking the button labeled "Save Entries to File"
 - 4. Display books under 200 pages in the scroll panel by clicking the button labeled "Display Books Over 200 Pages"
+
+# Phase 4: Task 2
+Mon Nov 27 16:58:32 PST 2023
+New book added to book wish list.
+
+Mon Nov 27 16:59:06 PST 2023
+New book added to book wish list.
+
+Mon Nov 27 16:59:11 PST 2023
+Books over 200 pages in the wish list displayed.

@@ -233,12 +233,15 @@ public class PersonalBookOrganizer extends JPanel {
         subsetDisplayButton.addActionListener(e -> subsetDisplayButtonClicked());
         userInterface.addToFrame(subsetDisplayButton);
 
+        userInterface.setupFrame("Personal Book Organizer: My Book Wish List");
+
+        /*
         JFrame frame = new JFrame("Personal Book Organizer: My Book Wish List");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(userInterface);
         frame.pack();
         frame.setVisible(true);
-
+        */
 
 
         //System.out.println("\nAdding a new book to wishlist...\n");
@@ -418,6 +421,13 @@ public class PersonalBookOrganizer extends JPanel {
     }
 
     private void subsetDisplayButtonClicked() {
+        List<Book> subset = myBookWishList.getSubsetOfBookWishList();
+        for (Book book: subset) {
+            userInterface.addToTextArea("***Over 200 Pages***\n");
+            userInterface.addToTextArea("Author: " + book.getAuthor() + "\nTitle: " + book.getTitle()
+                    + "\nGenre: " + book.getGenre() + "\n\n");
+        }
+        /*
         for (Book book: myBookWishList.getBookWishList()) {
             if (book.getTotalPages() > 200) {
                 userInterface.addToTextArea("***Over 200 Pages***\n");
@@ -425,5 +435,6 @@ public class PersonalBookOrganizer extends JPanel {
                         + "\nGenre: " + book.getGenre() + "\n\n");
             }
         }
+         */
     }
 }
