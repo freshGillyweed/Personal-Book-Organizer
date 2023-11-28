@@ -56,3 +56,8 @@ New book added to book wish list.
 
 Mon Nov 27 16:59:11 PST 2023
 Books over 200 pages in the wish list displayed.
+
+# Phase 4: Task 3
+BookmarkList, BookReviewList, and BookWishList classes have common features, especially in that they all have methods related to adding an arbitrary number of 'Xs to Y' and returning their respective lists. In this sense, using an interface with method declarations relating to the shared behavior would improve the design.
+
+JsonReaderBookmarkList, JsonReaderBookReviewList, and JsonReaderBookWishList classes also have common behavior in that they all read from JSON data stored in file. In addition, JsonWriterBookmarkList, JsonWriterBookReviewList, and JsonWriterBookWishList classes all represent a writer that writes JSON representation to file. For both of these cases, we can use an interface to improve readability and reusability.

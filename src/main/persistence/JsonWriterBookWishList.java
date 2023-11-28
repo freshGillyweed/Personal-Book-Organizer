@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+// Represents a writer that writes JSON representation of bookWishList to file
 public class JsonWriterBookWishList {
     private static final int TAB = 4;
     private PrintWriter writer;
