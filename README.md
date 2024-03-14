@@ -1,5 +1,5 @@
 # 사용자 맞춤 독서 관리 앱
-- 해당 개인 프로젝트는 Unversity of British Columbia에 컴퓨터과학 전공 교환학생으로 파견되어 완성하였습니다. 
+- 해당 개인 프로젝트는 University of British Columbia에 컴퓨터과학 전공 교환학생으로 파견되어 완성하였습니다. 
 
 ## 나의 독서 현황과 취향을 관리하는 앱
 
